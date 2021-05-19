@@ -20,16 +20,18 @@ jobs:
           submodules: true
       - name: Build And Deploy
         id: builddeploy
-        uses: 
+        uses: BrandonHopcraft/anotherdeploy@master
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_SKY_0E37E211E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "{{appLocation}}" # App source code path
-          api_location: "{{apiLocation}}" # Api source code path - optional
-          output_location: "{{appArtifactLocation}}" # Built app content directory - optional
+          app_location: 'app' # App source code path
+          app_artifact_location: 'build' # Built app content directory - optional
+          app_build_command: 'npm run prodbuild'
+          build_timeout_in_minutes: 5
+          ignore_missing_api_token: true
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
@@ -39,7 +41,7 @@ jobs:
     steps:
       - name: Close Pull Request
         id: closepullrequest
-        uses: 
+        uses: BrandonHopcraft/anotherdeploy@master
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_SKY_0E37E211E }}
           action: "close"
