@@ -32,7 +32,7 @@ jobs:
           # app_build_command: 'npm run prodbuild'
           # build_timeout_in_minutes: 5
           # ignore_missing_api_token: true
-          ###### End of Repository/Build Configurations ######
+          ###### End of Repository/Build Configurations #########
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
